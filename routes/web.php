@@ -10,8 +10,10 @@ Route::view("/", "welcome")->name("home");
 
 Route::get("/forecast", function() {
     $cities = Cities::all();
-    return view("forecast", ["cities" => $cities]);
+    return view("forecast/forecast", ["cities" => $cities]);
 })->middleware("auth")->name("forecast.all");
+
+Route::get("/forecast/{city}", [ForecastController::class, "signleCityForecast"])->name("forecast.single");
 
 Route::middleware(["auth", AdminMiddleware::class])->name("forecast.")->prefix('/admin')->group(function () {
     Route::get('/forecast', [ForecastController::class, "index"])->name('list');

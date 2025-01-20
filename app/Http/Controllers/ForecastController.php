@@ -61,4 +61,31 @@ class ForecastController extends Controller
 
         return redirect()->back();
     }
+
+    public function signleCityForecast($city) {
+        $cities = [
+            "Beograd" => [23, 22, 25, 25, 21],
+            "Novi Sad" => [21, 22, 23, 32, 15],
+            "Zrenjanin" => [21, 21, 23, 23, 22]
+        ];
+
+        $lowerCaseCities = array_change_key_case($cities, CASE_LOWER);
+
+        $error = null;
+        $forecast = "";
+
+        $city = strtolower($city);
+
+        if(!array_key_exists($city, $lowerCaseCities)) {
+            $error = "There is no city with this name.";
+        } else {
+            $forecast = $lowerCaseCities[$city];
+        }
+
+       return view("forecast/singleCityForecast", [
+            "city" => $city,
+            "forecast" => $forecast,
+            "error" => $error
+        ]);
+    }
 }
