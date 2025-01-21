@@ -19,11 +19,14 @@ class ForecastsSeeder extends Seeder
         $faker = Factory::create();
 
         foreach($cities as $city) {
-            Forecasts::create([
-                "city_id" => $city->id,
-                "temperature" => $faker->randomFloat(2,-5, 35),
-                "date" => $faker->unique()->dateTimeInInterval($startDate = '-1 days', $interval = '+ 5 months', $timezone = null) 
-            ]);
+
+            for($i = 0; $i < 5; $i++) {
+                Forecasts::create([
+                    "city_id" => $city->id,
+                    "temperature" => $faker->randomFloat(2,-5, 35),
+                    "date" => $faker->unique()->dateTimeInInterval($startDate = '-1 days', $interval = '+ 5 months', $timezone = null) 
+                ]);
+            }
         }
     }
 }
