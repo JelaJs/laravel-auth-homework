@@ -10,10 +10,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($cities as $city)
+            @foreach($forecasts as $forecast)
                 <tr>
-                    <td>{{ $city->name }}</td>
-                    <td>{{ $city->temperature }}&deg;C</td>
+                    <td>{{ $forecast->city->name }}</td>
+                    <td>{{ $forecast->temperature }}</td>
                 </tr>
             @endforeach
         </tbody>

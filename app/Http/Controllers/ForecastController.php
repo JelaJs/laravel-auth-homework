@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cities;
+use App\Models\Forecasts;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -87,5 +88,13 @@ class ForecastController extends Controller
             "forecast" => $forecast,
             "error" => $error
         ]);
+    }
+
+    public function allForecasts() {
+        $forecasts = Forecasts::all();
+
+        return(view("forecast/forecast", [
+            "forecasts" => $forecasts
+        ]));
     }
 }

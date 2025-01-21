@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view("/", "welcome")->name("home");
 
-Route::get("/forecast", function() {
-    $cities = Cities::all();
-    return view("forecast/forecast", ["cities" => $cities]);
-})->middleware("auth")->name("forecast.all");
+Route::get("/forecast", [ForecastController::class, 'allForecasts'])->middleware("auth")->name("forecast.all");
 
 Route::get("/forecast/{city}", [ForecastController::class, "signleCityForecast"])->name("forecast.single");
 
