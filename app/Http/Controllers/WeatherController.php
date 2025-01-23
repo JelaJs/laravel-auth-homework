@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cities;
+use App\Models\Forecasts;
 use App\Models\Weather;
 use Illuminate\Http\Request;
 
@@ -29,5 +31,34 @@ class WeatherController extends Controller
         ]);
 
         return back();
+    }
+
+    public function adminCreateAndList() {
+
+        $cities = Cities::all();
+        
+        return view('admin/createAndList', [
+            "cities" => $cities,
+        ]);
+    }
+
+    public function store(Request $request) {
+        $request->validate([
+            "city_id" => "required|integer|exists:cities,id",
+            "temperature" => "required|numeric",
+            "weather_type" => ['required', 'in:sunny,snowy,rainy'],
+            "probability" => "required|integer",
+            "date" => "required|date"
+        ]);
+
+        Forecasts::create([
+            "city_id" => $request->get("city_id"),
+            "temperature" => $request->get("temperature"),
+            "weather_type" => $request->get("weather_type"),
+            "probability" => $request->get("probability"),
+            "date" => $request->get("date"),
+        ]);
+
+        return redirect()->back();
     }
 }

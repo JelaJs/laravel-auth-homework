@@ -22,6 +22,8 @@ Route::middleware(["auth", AdminMiddleware::class])->name("forecast.")->prefix('
     Route::delete('/forecast/destroy/{city}', [ForecastController::class, 'destroy'])->name('destroy');
     Route::get('/weather', [WeatherController::class, 'createAndList']);
     Route::patch('/weather', [WeatherController::class,'update'])->name('weather.update');
+    Route::get('/weather/forecasts', [WeatherController::class,'adminCreateAndList']);
+    Route::post('/weather/forecasts', [WeatherController::class, 'store'])->name('weather.store');
 });
 
 
