@@ -21,10 +21,15 @@ class ForecastsSeeder extends Seeder
         foreach($cities as $city) {
 
             for($i = 0; $i < 5; $i++) {
+                $weather_type = $faker->randomElement(['sunny', 'rainy', 'snowy']);
+                $probability = $weather_type === 'sunny' ? null : $faker->numberBetween(0, 100);
+
                 Forecasts::create([
                     "city_id" => $city->id,
                     "temperature" => $faker->randomFloat(2,-5, 35),
-                    "date" => $faker->unique()->dateTimeInInterval($startDate = '-1 days', $interval = '+ 5 months', $timezone = null) 
+                    "date" => $faker->unique()->dateTimeInInterval($startDate = '-1 days', $interval = '+ 5 months', $timezone = null),
+                    "weather_type" => $weather_type,
+                    "probability" => $probability,
                 ]);
             }
         }

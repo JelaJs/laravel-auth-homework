@@ -2,11 +2,8 @@
 
 @section('content')
 
-@if ($error !== null)
-    <p>{{ $error }}</p>
 
-@else
-    <h1 style="text-align: center;">{{$city}}</h1>
+    <h1 style="text-align: center;">{{$city->name}}</h1>
     <table>
         <thead>
             <tr>
@@ -14,12 +11,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($forecast as $temperature)
-                <tr>
-                    <td>{{ $temperature }}&deg;C</td>
-                </tr>
-            @endforeach
+                
+                    @foreach ($city->forecasts as $forecast)
+                    <tr>
+                        <td>{{ $forecast->temperature }}&deg;C</td>
+                    </tr>
+                    @endforeach
+                
         </tbody>
     </table>
-@endif
+
 @endsection

@@ -12,7 +12,9 @@ class Forecasts extends Model
     protected $fillable = [
         "city_id",
         "temperature",
-        "date"
+        "date",
+        "weather_type",
+        "probability"
     ];
 
     public function city() {
