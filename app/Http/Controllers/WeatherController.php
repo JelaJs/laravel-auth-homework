@@ -43,6 +43,7 @@ class WeatherController extends Controller
     }
 
     public function store(Request $request) {
+        
         $request->validate([
             "city_id" => "required|integer|exists:cities,id",
             "temperature" => "required|numeric",
