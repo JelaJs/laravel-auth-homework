@@ -7,8 +7,16 @@ class ForecastHelper {
     const WEATHER_TYPE = [
         "sunny" => "sun",
         "rainy" => "cloud-rain",
-        "snowy" => "snowflake"
+        "snowy" => "snowflake",
+        "cloudy" => "cloud",
     ];
+
+    public static function weatherTypeIcon($weather) {
+
+        $icon = self::WEATHER_TYPE[$weather];
+ 
+         return $icon;
+     }
 
     public static function getColorByTemperature($temperature) {
 
@@ -28,11 +36,6 @@ class ForecastHelper {
         return $color;
     }
 
-    public static function weatherTypeIcon($weather) {
-
-       $icon = self::WEATHER_TYPE[$weather];
-
-        return $icon;
-    }
+    
 }
 
